@@ -139,7 +139,6 @@ import UIKit
         path.addCurve(to: rightBottom, controlPoint1: ctrRBR1, controlPoint2: ctrRBR2)
         path.addLine(to: leftBottom)
         path.addCurve(to: leftMiddle, controlPoint1: ctrRBL1, controlPoint2: ctrRBL2)
-//        path.close()
         
         return path
     }
