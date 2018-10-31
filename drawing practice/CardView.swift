@@ -6,7 +6,6 @@
 //  Copyright © 2018 Pawel Misiak. All rights reserved.
 //
 
-
 import UIKit
 
 @IBDesignable class CardView: UIView {
@@ -145,9 +144,41 @@ import UIKit
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()
-        let path_1 = squigle(path: path)
-
-        path.append(path_1)
+        let pathToReturn = UIBezierPath()
+        let path_1 = oval(path: pathToReturn)
+        
+        if numberOfObjects == 1 {
+            path.append(path_1)
+        } else if numberOfObjects == 2 {
+            let leftPath = UIBezierPath()
+            leftPath.append(path_1)
+            let leftTransform = CGAffineTransform(translationX: CGFloat(-15.0), y: CGFloat(0))
+            leftPath.apply(leftTransform)
+            
+            let rightPath = UIBezierPath()
+            rightPath.append(path_1)
+            let rightTransform = CGAffineTransform(translationX: CGFloat(+15.0), y: CGFloat(0))
+            rightPath.apply(rightTransform)
+            
+            path.append(leftPath)
+            path.append(rightPath)
+        } else if numberOfObjects == 3 {
+            let leftPath = UIBezierPath()
+            leftPath.append(path_1)
+            let leftTransform = CGAffineTransform(translationX: CGFloat(-25.0), y: CGFloat(0))
+            leftPath.apply(leftTransform)
+            
+            let rightPath = UIBezierPath()
+            rightPath.append(path_1)
+            let rightTransform = CGAffineTransform(translationX: CGFloat(+25.0), y: CGFloat(0))
+            rightPath.apply(rightTransform)
+            
+            path.append(pathToReturn)
+            path.append(leftPath)
+            path.append(rightPath)
+        }
+        
+        
         color.setFill()
         path.lineWidth = CGFloat(lineWidth)
         path.stroke()
